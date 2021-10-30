@@ -8,7 +8,6 @@ import Landing from "../pages/Landing";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import ContactUs from "../pages/ContactUs";
-import Chat from "../components/Chat";
 import User from "../pages/User";
 
 const Router = () => {
