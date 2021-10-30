@@ -9,6 +9,8 @@ import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import ContactUs from "../pages/ContactUs";
 import Chat from "../components/Chat";
+import User from "../pages/User";
+
 const Router = () => {
   const { status, data: signedIn } = useSigninCheck();
 
@@ -23,6 +25,8 @@ const Router = () => {
           <Route path="/" exact component={Landing} />
 
           <Route path="/contact-us" component={ContactUs} />
+
+          <Route path="/user/:uid" component={User} />
 
           <Route path="/login">
             {signedIn.signedIn ? <Redirect to="/dashboard" /> : <Login />}
