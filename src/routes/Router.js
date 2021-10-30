@@ -48,7 +48,7 @@ const Router = () => {
               <Redirect to="/login" />
             )}
           </Route>
-          <Route path="/Chat">
+          <Route path="/chat">
             {signedIn.signedIn ? (
               <div className="chatApp">
                 <Chat />
