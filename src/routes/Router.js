@@ -1,6 +1,6 @@
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
-import { useSigninCheck } from "reactfire";
+import { useAuth, useSigninCheck } from "reactfire";
 
 import Loader from "../components/Loader";
 
@@ -10,8 +10,10 @@ import ContactUs from "../pages/ContactUs";
 import User from "../pages/User";
 import Chat from "../components/Chat";
 import SignUp from "../pages/SignUp";
+import { signOut } from "@firebase/auth";
 
 const Router = () => {
+  const auth = useAuth();
   const { status, data: signedIn } = useSigninCheck();
 
   if (status === "loading") {
@@ -20,6 +22,9 @@ const Router = () => {
 
   return (
     <>
+      <header>
+        <button onClick={() => signOut(auth)}>Sign out!</button>
+      </header>
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Landing} />
