@@ -36,7 +36,13 @@ const Router = () => {
             {signedIn.signedIn ? <Dashboard /> : <Redirect to="/login" />}
           </Route>
           <Route path="/Chat">
-            {signedIn.signedIn ? <Chat /> : <Redirect to="/login" />}
+            {signedIn.signedIn ? (
+              <div className="chatApp">
+                <Chat />
+              </div>
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
         </Switch>
       </BrowserRouter>

@@ -1,14 +1,14 @@
-body {
+/* body {
   background-color: #282c34;
-}
+} */
 
-.App {
+.chatApp {
   text-align: center;
   max-width: 728px;
   margin: 0 auto;
 }
 
-.App header {
+.chatApp header {
   background-color: #181717;
   height: 10vh;
   min-height: 50px;
@@ -25,7 +25,7 @@ body {
   box-sizing: border-box;
 }
 
-.App section {
+.chatApp section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,7 +33,7 @@ body {
   background-color: rgb(40, 37, 53);
 }
 
-main {
+.chatApp {
   padding: 10px;
   height: 80vh;
   margin: 10vh 0 10vh;
@@ -42,19 +42,19 @@ main {
   flex-direction: column;
 }
 
-main::-webkit-scrollbar {
+.chatApp main::-webkit-scrollbar {
   width: 0.25rem;
 }
 
-main::-webkit-scrollbar-track {
+.chatApp main::-webkit-scrollbar-track {
   background: #1e1e24;
 }
 
-main::-webkit-scrollbar-thumb {
+.chatApp main::-webkit-scrollbar-thumb {
   background: #6649b8;
 }
 
-form {
+.chatApp form {
   height: 10vh;
   position: fixed;
   bottom: 0;
@@ -65,12 +65,12 @@ form {
   font-size: 1.5rem;
 }
 
-form button {
+.chatApp form button {
   width: 20%;
   background-color: rgb(56, 56, 143);
 }
 
-input {
+.chatApp input {
   line-height: 1.5;
   width: 100%;
   font-size: 1.5rem;
@@ -81,8 +81,8 @@ input {
   padding: 0 10px;
 }
 
-button {
-  background-color: #282c34; /* Green */
+.chatApp button {
+  background-color: #282c34;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -93,7 +93,7 @@ button {
   font-size: 1.25rem;
 }
 
-button:disabled {
+.chatApp button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -105,13 +105,13 @@ button:disabled {
   margin: 0 auto;
 }
 
-ul,
-li {
+.chatApp ul,
+.chatApp li {
   text-align: left;
   list-style: none;
 }
 
-p {
+.chatApp p {
   max-width: 500px;
   margin-bottom: 12px;
   line-height: 24px;
@@ -122,26 +122,26 @@ p {
   text-align: center;
 }
 
-.message {
+.chatApp .message {
   display: flex;
   align-items: center;
 }
 
-.sent {
+.chatApp .sent {
   flex-direction: row-reverse;
 }
 
-.sent p {
+.chatApp .sent p {
   color: white;
   background: #0b93f6;
   align-self: flex-end;
 }
-.received p {
+.chatApp .received p {
   background: #e5e5ea;
   color: black;
 }
 
-img {
+.chatApp img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
