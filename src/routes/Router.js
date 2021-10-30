@@ -14,7 +14,7 @@ import Chat from "../components/Chat";
 const Router = () => {
   const { status, data: signedIn } = useSigninCheck();
 
-  if (status === "loading") {
+  if (status === "loading" || true) {
     return <Loader />;
   }
 
