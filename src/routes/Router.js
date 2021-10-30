@@ -6,10 +6,10 @@ import Loader from "../components/Loader";
 
 import Landing from "../pages/Landing";
 import Login from "../pages/Login";
-import Dashboard from "../pages/Dashboard";
 import ContactUs from "../pages/ContactUs";
 import User from "../pages/User";
 import Chat from "../components/Chat";
+import SignUp from "../pages/SignUp";
 
 const Router = () => {
   const { status, data: signedIn } = useSigninCheck();
@@ -32,8 +32,16 @@ const Router = () => {
             {signedIn.signedIn ? <Redirect to="/dashboard" /> : <Login />}
           </Route>
 
+          <Route path="/signup">
+            {signedIn.signedIn ? <Redirect to="/dashboard" /> : <SignUp />}
+          </Route>
+
           <Route path="/dashboard">
-            {signedIn.signedIn ? <Dashboard /> : <Redirect to="/login" />}
+            {signedIn.signedIn ? (
+              <Redirect to={`/user/${signedIn.user.uid}`} />
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
           <Route path="/Chat">
             {signedIn.signedIn ? (

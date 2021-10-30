@@ -22,15 +22,16 @@ const User = () => {
   }
 
   return (
-    <div className="p-4 flex flex-col md:flex-row gap-4 bg-gray-400">
+    <div className="p-4 flex flex-col md:flex-row gap-4">
       <UserProfileView
         name={userData.name}
+        contact={userData.contact}
         age={userData.age}
         gender={userData.gender}
         location={userData.location}
         photo_url={userData.photo_url}
       />
-      <TripList name={userData.name} uid={uid} trip_ids={userData.trips} />
+      <TripList name={userData.name} uid={uid} />
     </div>
   );
 };

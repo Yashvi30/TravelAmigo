@@ -6,11 +6,18 @@ const Pill = ({ children }) => {
   );
 };
 
-const UserProfileView = ({ name, gender, age, location, photo_url }) => {
+const UserProfileView = ({
+  name,
+  contact,
+  gender,
+  age,
+  location,
+  photo_url,
+}) => {
   return (
-    <div className="bg-white p-8 shadow-lg rounded-lg flex flex-col gap-4 relative overflow-hidden">
+    <div className="bg-purple-100 p-8 shadow-lg rounded-lg flex flex-col gap-4 relative ">
       <div>
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-green-500 to-indigo-500"></div>
+        <div className="absolute top-0 left-0 right-0 rounded-lg h-24 bg-gradient-to-b from-green-500 to-indigo-500"></div>
         <img
           src={photo_url}
           alt={`${name}'s profile`}
@@ -18,6 +25,9 @@ const UserProfileView = ({ name, gender, age, location, photo_url }) => {
         />
       </div>
       <div className="text-3xl text-center font-bold">{name}</div>
+      <div className="text-xs font-bold rounded-md w-full text-center shadow-md px-4 py-2 bg-pink-300 text-pink-900">
+        {contact}
+      </div>
       <div className="flex justify-center items-center gap-2 w-full">
         <Pill>{age}</Pill>
         <Pill>{gender.toUpperCase()}</Pill>

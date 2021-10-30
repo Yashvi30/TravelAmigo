@@ -17,16 +17,16 @@ import "../styles/Loader.scss";
 
 const Loader = () => {
   return (
-    <div class="example1">
-      <div class="block1">
-        <div class="item1"></div>
-        <div class="item1"></div>
-        <div class="item1"></div>
-        <div class="item1"></div>
-        <div class="item1"></div>
-        <div class="item1"></div>
-        <div class="item1"></div>
-        <div class="item1"></div>
+    <div className="example1">
+      <div className="block1">
+        <div className="item1"></div>
+        <div className="item1"></div>
+        <div className="item1"></div>
+        <div className="item1"></div>
+        <div className="item1"></div>
+        <div className="item1"></div>
+        <div className="item1"></div>
+        <div className="item1"></div>
       </div>
     </div>
   );
