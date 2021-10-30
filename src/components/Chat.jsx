@@ -20,16 +20,17 @@ import {
 import { Redirect } from "react-router";
 import Loader from "./Loader";
 
+// export { auth, database };
 function Chat() {
   const auth = useAuth();
-  const { status, data: signedIn } = useSigninCheck();
+  const { data: signedIn } = useSigninCheck();
 
   return (
     <div className="App">
       <header>
-        <h1>⚛️🔥💬</h1>
+        <h1>Chat💬</h1>
       </header>
-      {status === "success"}
+      {/* {status === "success"} */}
       <button onClick={() => signOut(auth)}>Sign out!</button>
       <section>
         {signedIn.signedIn ? <ChatRoom /> : <Redirect to="/login" />}
