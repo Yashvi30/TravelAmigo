@@ -1,30 +1,29 @@
-import React from "react";
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
-import Login from "../pages/Login";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import { useState, useEffect, useRef } from "react";
-import "..styles/Chat.css";
+import { useState } from "react";
+import "../styles/Chat.css";
 
 import { signOut } from "@firebase/auth";
-import { useAuth, useUser } from "reactfire";
-
-firebase.initializeApp({
-  apiKey: "AIzaSyCbpYejIvC4DJuripmwEc64CHEm8Z6dK60",
-  authDomain: "travel-amigo-app.firebaseapp.com",
-  projectId: "travel-amigo-app",
-  storageBucket: "travel-amigo-app.appspot.com",
-  messagingSenderId: "1078903719364",
-  appId: "1:1078903719364:web:fdc6bca0d115abd8419091",
-});
-const auth = firebase.auth();
-const firestore = firebase.firestore();
+import {
+  addDoc,
+  collection,
+  limitToLast,
+  orderBy,
+  query,
+  serverTimestamp,
+} from "@firebase/firestore";
+import {
+  useAuth,
+  useFirestore,
+  useFirestoreCollectionData,
+  useSigninCheck,
+  useUser,
+} from "reactfire";
+import { Redirect } from "react-router";
+import Loader from "./Loader";
 
 function Chat() {
-  const [user] = useAuthState(auth);
-  const { status, data: user } = useUser();
+  const auth = useAuth();
+  const { status, data: signedIn } = useSigninCheck();
+
   return (
     <div className="App">
       <header>
@@ -32,32 +31,42 @@ function Chat() {
       </header>
       {status === "success"}
       <button onClick={() => signOut(auth)}>Sign out!</button>
-      <section>{user ? <ChatRoom /> : <SignIn />}</section>
+      <section>
+        {signedIn.signedIn ? <ChatRoom /> : <Redirect to="/login" />}
+      </section>
     </div>
   );
 }
 
 function ChatRoom() {
-  const messagesRef = firestore.collection("messages");
-  const query = messagesRef.orderBy("createdAt").limitToLast(25);
+  const firestore = useFirestore();
+  const ref = collection(firestore, "messages");
+  const messageQuery = query(ref, orderBy("createdAt"), limitToLast(25));
 
-  const [messages] = useCollectionData(query, { idField: "id" });
+  const { status, data: messages } = useFirestoreCollectionData(messageQuery);
   const [formValue, setFormValue] = useState("");
+  const { status: userStatus, data: user } = useUser();
+
+  if (status === "loading" || userStatus === "loading") {
+    return <Loader />;
+  }
+
+  if (status === "error" || userStatus === "error" || !messages) {
+    return <div>No message found!</div>;
+  }
+
+  if (!user) {
+    return <Redirect to="/login" />;
+  }
 
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    const { uid, photoURL } = auth.currentUser;
-    const dummy = useRef();
-
-    useEffect(() => {
-      dummy.current.scrollIntoView({ behavior: "smooth" });
-    }, [messages]);
-    await messagesRef.add({
+    await addDoc(ref, {
       text: formValue,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid,
-      photoURL,
+      createdAt: serverTimestamp(),
+      uid: user.uid,
+      photoURL: user.photoURL,
     });
 
     setFormValue("");
@@ -68,7 +77,6 @@ function ChatRoom() {
       <main>
         {messages &&
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
-        <span ref={dummy}></span>
       </main>
       <form onSubmit={sendMessage}>
         <input
@@ -86,17 +94,17 @@ function ChatRoom() {
 }
 
 function ChatMessage(props) {
+  const auth = useAuth();
   const { text, uid, photoURL } = props.message;
-
   const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
-
   return (
     <>
       <div className={`message ${messageClass}`}>
-        <img src={photoURL} alt={user} />
+        <img src={photoURL} alt={auth.currentUser.displayName} />
         <p>{text}</p>
       </div>
     </>
   );
 }
+
 export default Chat;
