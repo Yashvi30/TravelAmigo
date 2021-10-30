@@ -9,6 +9,7 @@ import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import ContactUs from "../pages/ContactUs";
 import User from "../pages/User";
+import Chat from "../components/Chat";
 
 const Router = () => {
   const { status, data: signedIn } = useSigninCheck();
