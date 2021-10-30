@@ -101,7 +101,10 @@ function ChatMessage(props) {
   return (
     <>
       <div className={`message ${messageClass}`}>
-        <img src={photoURL} alt={auth.currentUser.displayName} />
+        <img
+          src={photoURL || "https://randomuser.me/api/portraits/lego/5.jpg"}
+          alt={auth.currentUser.displayName}
+        />
         <p>{text}</p>
       </div>
     </>
