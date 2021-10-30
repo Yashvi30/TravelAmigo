@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "../styles/Chat.css";
 
-import { signOut } from "@firebase/auth";
 import {
   addDoc,
   collection,
@@ -21,16 +20,17 @@ import { Redirect } from "react-router";
 import Loader from "./Loader";
 
 function Chat() {
-  const auth = useAuth();
   const { status, data: signedIn } = useSigninCheck();
+
+  if (status === "loading") {
+    return <Loader />;
+  }
 
   return (
     <div className="App">
       <header>
         <h1>⚛️🔥💬</h1>
       </header>
-      {status === "success"}
-      <button onClick={() => signOut(auth)}>Sign out!</button>
       <section>
         {signedIn.signedIn ? <ChatRoom /> : <Redirect to="/login" />}
       </section>
