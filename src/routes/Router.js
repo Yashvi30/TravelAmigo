@@ -2,6 +2,8 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import { useSigninCheck } from "reactfire";
 
+import Loader from "../components/Loader";
+
 import Landing from "../pages/Landing";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
@@ -11,7 +13,7 @@ const Router = () => {
   const { status, data: signedIn } = useSigninCheck();
 
   if (status === "loading") {
-    return <></>;
+    return <Loader />;
   }
 
   return (
