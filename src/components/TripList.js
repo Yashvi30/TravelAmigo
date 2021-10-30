@@ -26,7 +26,10 @@ const TripList = ({ name, uid }) => {
     return <div>Error: No trips found for user {uid}</div>;
   }
 
-  const isUserProfile = uid === userData.uid;
+  let isUserProfile = false;
+  if (uid === userData?.uid) {
+    isUserProfile = true;
+  }
 
   return (
     <div className="bg-purple-50 rounded-lg shadow-lg p-4 w-full">
