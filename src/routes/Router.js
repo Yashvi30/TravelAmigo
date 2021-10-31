@@ -4,7 +4,6 @@ import { useSigninCheck } from "reactfire";
 
 import Loader from "../components/Loader";
 
-import Landing from "../pages/Landing";
 import Login from "../pages/Login";
 import ContactUs from "../pages/ContactUs";
 import User from "../pages/User";
@@ -26,6 +25,7 @@ const Router = () => {
         <Navbar />
         <Switch>
           <Route path="/" exact>
+            {/* <Home /> */}
             <Redirect to="/login" />
           </Route>
 

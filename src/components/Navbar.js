@@ -9,8 +9,8 @@ const Navbar = () => {
   const auth = useAuth();
   const history = useHistory();
 
-  const signOutUser = () => {
-    signOut(auth);
+  const signOutUser = async () => {
+    await signOut(auth);
     history.push("/");
   };
 
@@ -31,6 +31,7 @@ const Navbar = () => {
         </Link>
       </h1>
       <div className="flex-1"></div>
+
       {signInData.signedIn && (
         <div className="font-bold prose-lg">
           <Link to={`/user/${signInData?.user?.uid}`}>My Profile</Link>
@@ -43,9 +44,17 @@ const Navbar = () => {
         </div>
       )}
 
-      {signInData.signedIn && (
+      {/* {signInData.signedIn && (
         <div className="font-bold prose-lg">
           <Link to="/trips">Look for trips</Link>
+        </div>
+      )} */}
+
+      {signInData.signedIn && (
+        <div className="font-bold prose-lg">
+          <div className="font-bold prose-lg">
+            <Link to="/chat">Chat</Link>
+          </div>
         </div>
       )}
 
