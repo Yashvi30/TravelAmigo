@@ -15,7 +15,7 @@ const UserProfileView = ({
   photo_url,
 }) => {
   return (
-    <div className="bg-purple-100 p-8 shadow-lg rounded-lg flex flex-col gap-4 relative ">
+    <div className="bg-purple-100 p-8 shadow-lg rounded-lg flex flex-col gap-4 relative">
       <div>
         <div className="absolute top-0 left-0 right-0 rounded-lg h-24 bg-gradient-to-b from-green-500 to-indigo-500"></div>
         <img

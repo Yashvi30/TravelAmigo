@@ -1,6 +1,6 @@
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
-import { useAuth, useSigninCheck } from "reactfire";
+import { useSigninCheck } from "reactfire";
 
 import Loader from "../components/Loader";
 
@@ -10,10 +10,10 @@ import ContactUs from "../pages/ContactUs";
 import User from "../pages/User";
 import Chat from "../components/Chat";
 import SignUp from "../pages/SignUp";
-import { signOut } from "@firebase/auth";
+import Navbar from "../components/Navbar";
+import AddTrip from "../pages/AddTrip";
 
 const Router = () => {
-  const auth = useAuth();
   const { status, data: signedIn } = useSigninCheck();
 
   if (status === "loading") {
@@ -22,12 +22,12 @@ const Router = () => {
 
   return (
     <>
-      <header>
-        <button onClick={() => signOut(auth)}>Sign out!</button>
-      </header>
       <BrowserRouter>
+        <Navbar />
         <Switch>
-          <Route path="/" exact component={Landing} />
+          <Route path="/" exact>
+            <Redirect to="/login" />
+          </Route>
 
           <Route path="/contact-us" component={ContactUs} />
 
@@ -41,6 +41,10 @@ const Router = () => {
             {signedIn.signedIn ? <Redirect to="/dashboard" /> : <SignUp />}
           </Route>
 
+          <Route path="/add-trip">
+            {signedIn.signedIn ? <AddTrip /> : <Redirect to="/login" />}
+          </Route>
+
           <Route path="/dashboard">
             {signedIn.signedIn ? (
               <Redirect to={`/user/${signedIn.user.uid}`} />
@@ -48,6 +52,7 @@ const Router = () => {
               <Redirect to="/login" />
             )}
           </Route>
+
           <Route path="/chat">
             {signedIn.signedIn ? (
               <div className="chatApp">
