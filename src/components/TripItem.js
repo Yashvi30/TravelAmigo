@@ -5,27 +5,32 @@ const TripItem = ({
   destination,
   date,
   wanted,
+  going,
   username,
   showDelete,
   onDelete,
 }) => {
   return (
-    <div className="bg-white px-4 py-2 rounded-lg border-2 shadow-md flex flex-col gap-2">
+    <div className="bg-white p-4 rounded-lg border-2 shadow-md flex flex-col gap-2">
       <div className="prose-xl">
-        {showDelete ? (
-          "I"
-        ) : (
-          <Link to={`/user/${uid}`} className="text-blue-500">
-            {username}
-          </Link>
-        )}{" "}
-        {showDelete ? "am" : "is"} going to{" "}
-        <span className="text-green-500">{destination}</span> on{" "}
+        <span className="font-bold">Organizer: </span>
+        <Link to={`/user/${uid}`} className="text-blue-500">
+          {username}
+        </Link>
+      </div>
+      <div>
+        <span className="font-bold">Destination: </span>
+        <span className="text-green-500">{destination}</span>
+      </div>
+      <div>
+        <span className="font-bold">Date: </span>
         <span className="text-purple-500">
           {new Date(date.seconds * 1000).toLocaleDateString("en-IN")}
         </span>
       </div>
-      <div className="prose-md">Looking for upto {wanted} companions!</div>
+      <div className="prose-md font-bold">
+        {going.length}/{wanted}
+      </div>
       <div>
         {showDelete && (
           <button

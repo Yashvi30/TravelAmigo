@@ -9,7 +9,7 @@ const SignUp = () => {
 
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState("");
   const [location, setLocation] = useState("");
   const [contact, setContact] = useState("");
   const [photoURL, setPhotoURL] = useState(
@@ -70,8 +70,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center items-center p-4 bg-gray-400">
-      <div className="p-4 bg-green-100 rounded-lg shadow-lg flex flex-col gap-4">
+    <div className="flex justify-center items-center p-4">
+      <div className="p-4 bg-green-50 rounded-lg shadow-lg flex flex-col gap-4">
         <h1 className="text-3xl font-bold">Sign up for TravelAmigo!</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
